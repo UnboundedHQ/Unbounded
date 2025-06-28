@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvrs OS - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;700&family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/icons/favicon.png" type="image/png">
+</head>
+<body>
+
+    <div class="custom-cursor"></div>
+    <div id="tooltip"></div>
+
+    <div id="mobile-warning" class="hidden">
+        <div class="warning-content">
+            <h1>SYSTEM INCOMPATIBILITY</h1>
+            <p>This operating system requires a full desktop environment with mouse and keyboard for core functionality. Mobile access is not supported. Please return on a desktop computer to initiate the boot sequence.</p>
+        </div>
+    </div>
+
+    <div id="boot-sequence">
+        <div class="boot-logo">
+            <svg class="boot-icon box-animate" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="10" width="80" height="80" fill="none" stroke="#89b4f9" stroke-width="4"/>
+            </svg>
+            <svg class="boot-icon diamond-animate" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="position: absolute;">
+                <path d="M50 10 L90 50 L50 90 L10 50 Z" fill="none" stroke="#a872e0" stroke-width="4"/>
+            </svg>
+            <svg class="boot-icon circle-animate" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="position: absolute;">
+                <circle cx="50" cy="50" r="25" fill="none" stroke="#66d9ef" stroke-width="4"/>
+            </svg>
+        </div>
+        <p class="boot-text">canvrs OS</p>
+        <div class="loading-bar"></div>
+    </div>
+
+    <div id="desktop" class="hide">
+        <canvas id="desktop-canvas"></canvas>
+
+        <div class="desktop-icons">
+            <div class="desktop-icon tooltip-container" data-app="about" data-tooltip="Info about me">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                <span>about_me</span>
+            </div>
+            <div class="desktop-icon tooltip-container" data-app="terminal" data-tooltip="Command Line Interface">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line>
+                </svg>
+                <span>terminal</span>
+            </div>
+            <div class="desktop-icon tooltip-container" data-app="file-explorer" data-tooltip="File Explorer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z"></path>
+                </svg>
+                <span>files</span>
+            </div>
+            <div class="desktop-icon tooltip-container" data-app="contact" data-tooltip="My GitHub">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+                <span>elsewhere</span>
+            </div>
+             <div class="desktop-icon tooltip-container" data-app="system-monitor" data-tooltip="System Monitor">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect><line x1="2" y1="12" x2="22" y2="12"></line><line x1="12" y1="2" x2="12" y2="22"></line>
+                </svg>
+                <span>sys_monitor</span>
+            </div>
+            <div class="desktop-icon tooltip-container" data-app="settings" data-tooltip="System Settings">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+                <span>settings</span>
+            </div>
+            <div class="desktop-icon tooltip-container hidden" data-app="core_sentinel" data-tooltip="Core Sentinel Protocol">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>core_sentinel.exe</span>
+            </div>
+        </div>
+
+        <div class="taskbar">
+            <div class="taskbar-left">
+                <div class="taskbar-apps" id="taskbar-apps-container">
+                    </div>
+            </div>
+            <div class="system-tray">
+                <div id="system-time" class="tooltip-container" data-tooltip="System Time">17:04 CEST</div>
+            </div>
+        </div>
+
+        <div id="custom-context-menu" class="context-menu hidden">
+            <div class="context-menu-item" data-action="open">Open</div>
+            <div class="context-menu-item" data-action="close">Close Window</div>
+            <div class="context-menu-item" data-action="minimize">Minimize Window</div>
+            <div class="context-menu-item" data-action="pin">Pin to Taskbar</div>
+            <div class="context-menu-item" data-action="unpin">Unpin from Taskbar</div>
+        </div>
+
+        <div class="easter-egg-zone"></div>
+
+        <div class="window" id="window-about" data-app="about">
+            <div class="window-header">
+                <span class="window-title">about_me.txt</span>
+                <div class="window-controls">
+                    <button class="minimize-btn tooltip-container" data-tooltip="Minimize"></button>
+                    <button class="maximize-btn tooltip-container" data-tooltip="Maximize"></button>
+                    <button class="close-btn tooltip-container" data-tooltip="Close"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <p>hey, i'm a dev from germany. i craft tools that make the web better, faster, and more fun. think of me as a digital architect who loves solving puzzles :)</p>
+                <br>
+                <p>i get a kick out of turning complex problems into elegant code. if it's broken, i fix it. if it's slow, i speed it up. and if it's boring, i make it cool.</p>
+                <br>
+                <p><strong>languages:</strong> fluent in code and human languages: english, german, and a tiny bit of spanish & turkish.</p>
+                <p><strong>interests:</strong> everything from web magic and clean design to late-night gaming sessions.</p>
+            </div>
+             <div class="resizer"></div>
+        </div>
+
+        <div class="window" id="window-terminal" data-app="terminal">
+            <div class="window-header">
+                <span class="window-title">root@canvrs_os:~</span>
+                <div class="window-controls">
+                    <button class="minimize-btn tooltip-container" data-tooltip="Minimize"></button>
+                    <button class="maximize-btn tooltip-container" data-tooltip="Maximize"></button>
+                    <button class="close-btn tooltip-container" data-tooltip="Close"></button>
+                </div>
+            </div>
+            <div class="window-body terminal-body">
+                <div class="terminal-output">
+                    <div class="line"><span>Welcome to canvrs OS Terminal. Type 'help' to begin.</span></div>
+                    <div class="line" id="terminal-input-line">
+                        <span class="prompt">root@canvrs_os:~$</span>
+                        <input type="text" class="terminal-input" autofocus autocomplete="off" spellcheck="false">
+                        <span class="blinking-cursor"></span>
+                    </div>
+                </div>
+            </div>
+             <div class="resizer"></div>
+        </div>
+
+        <div class="window" id="window-contact" data-app="contact">
+            <div class="window-header">
+                <span class="window-title">connect_me.exe</span>
+                <div class="window-controls">
+                    <button class="minimize-btn tooltip-container" data-tooltip="Minimize"></button>
+                    <button class="maximize-btn tooltip-container" data-tooltip="Maximize"></button>
+                    <button class="close-btn tooltip-container" data-tooltip="Close"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <p>most of my public work and repositories live under my collective, <a href="https://github.com/modcoretech" target="_blank" rel="noopener noreferrer">@modcoretech</a>. it's my little corner of the digital world.</p>
+                <br>
+                <p>i'm usually deep in the code, but my commits tell the full story. come say hi or just poke around—you might find something cool. ;)</p>
+            </div>
+             <div class="resizer"></div>
+        </div>
+
+        <div class="window" id="window-file-explorer" data-app="file-explorer">
+            <div class="window-header">
+                <span class="window-title">filesystem:/</span>
+                <div class="window-controls">
+                    <button class="minimize-btn tooltip-container" data-tooltip="Minimize"></button>
+                    <button class="maximize-btn tooltip-container" data-tooltip="Maximize"></button>
+                    <button class="close-btn tooltip-container" data-tooltip="Close"></button>
+                </div>
+            </div>
+            <div class="window-body file-explorer-body">
+                <div class="file-toolbar">
+                    <button id="up-dir-btn" class="toolbar-btn hidden">../</button>
+                    <span id="current-path">/</span>
+                </div>
+                <div class="file-list" id="file-list-container">
+                </div>
+            </div>
+             <div class="resizer"></div>
+        </div>
+
+        <div class="window" id="window-system-monitor" data-app="system-monitor">
+            <div class="window-header">
+                <span class="window-title">system_monitor.sh</span>
+                <div class="window-controls">
+                    <button class="minimize-btn tooltip-container" data-tooltip="Minimize"></button>
+                    <button class="maximize-btn tooltip-container" data-tooltip="Maximize"></button>
+                    <button class="close-btn tooltip-container" data-tooltip="Close"></button>
+                </div>
+            </div>
+            <div class="window-body sys-monitor-body">
+                <div class="monitor-item">
+                    <div class="monitor-label">CPU Usage</div>
+                    <div class="monitor-bar-container">
+                        <div class="monitor-bar" id="cpu-bar" style="width: 25%;"></div>
+                    </div>
+                    <div class="monitor-value" id="cpu-value">25%</div>
+                </div>
+                <div class="monitor-item">
+                    <div class="monitor-label">RAM Usage</div>
+                    <div class="monitor-bar-container">
+                        <div class="monitor-bar" id="ram-bar" style="width: 40%;"></div>
+                    </div>
+                    <div class="monitor-value" id="ram-value">40%</div>
+                </div>
+                 <div class="monitor-item">
+                    <div class="monitor-label">Disk I/O</div>
+                    <div class="monitor-bar-container">
+                        <div class="monitor-bar" id="disk-bar" style="width: 15%;"></div>
+                    </div>
+                    <div class="monitor-value" id="disk-value">15%</div>
+                </div>
+                <div class="monitor-item">
+                    <div class="monitor-label">Network Activity</div>
+                    <div class="monitor-chart" id="network-chart"></div>
+                </div>
+            </div>
+             <div class="resizer"></div>
+        </div>
+
+        <div class="window" id="window-settings" data-app="settings">
+            <div class="window-header">
+                <span class="window-title">settings.ini</span>
+                <div class="window-controls">
+                    <button class="minimize-btn tooltip-container" data-tooltip="Minimize"></button>
+                    <button class="maximize-btn tooltip-container" data-tooltip="Maximize"></button>
+                    <button class="close-btn tooltip-container" data-tooltip="Close"></button>
+                </div>
+            </div>
+            <div class="window-body theme-wizard-body">
+                <h3>Theme Customizer</h3>
+                <div class="theme-option">
+                    <label for="bg-color-picker">Background Color:</label>
+                    <input type="color" id="bg-color-picker" data-css-var="--bg-color" value="#12141c">
+                </div>
+                <div class="theme-option">
+                    <label for="accent-color-picker">Accent Color:</label>
+                    <input type="color" id="accent-color-picker" data-css-var="--accent-color" value="#89b4f9">
+                </div>
+                 <div class="theme-option">
+                    <label for="text-color-picker">Text Color:</label>
+                    <input type="color" id="text-color-picker" data-css-var="--text-color" value="#e2e8f0">
+                </div>
+                <button id="reset-theme-btn">Reset to Default</button>
+            </div>
+             <div class="resizer"></div>
+        </div>
+        
+        <div class="window" id="window-editor" data-app="editor">
+            <div class="window-header">
+                <span class="window-title">editor</span>
+                <div class="window-controls">
+                    <button class="minimize-btn tooltip-container" data-tooltip="Minimize"></button>
+                    <button class="maximize-btn tooltip-container" data-tooltip="Maximize"></button>
+                    <button class="close-btn tooltip-container" data-tooltip="Close"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <textarea class="notes-textarea" readonly></textarea>
+            </div>
+             <div class="resizer"></div>
+        </div>
+        
+        <div class="window" id="window-core_sentinel" data-app="core_sentinel">
+            <div class="window-header">
+                <span class="window-title">core_sentinel.exe</span>
+                <div class="window-controls">
+                    <button class="minimize-btn tooltip-container" data-tooltip="Minimize"></button>
+                    <button class="maximize-btn tooltip-container" data-tooltip="Maximize"></button>
+                    <button class="close-btn tooltip-container" data-tooltip="Close"></button>
+                </div>
+            </div>
+            <div class="window-body hacker-game-body">
+                <div id="sentinel-content-initial">
+                    <p>Core Sentinel Protocol requires administrator credentials to proceed.</p>
+                    <input type="password" id="password-input" placeholder="Enter restoration key..." autocomplete="off">
+                    <button id="password-submit-btn">Authorize</button>
+                    <p class="status-message" id="hacker-game-status"></p>
+                </div>
+                <div id="sentinel-content-success" class="hidden">
+                     <p class="status-message success">Authorization Accepted.</p>
+                     <p>Restoration key validated. Re-calibrating system core...</p>
+                     <p>Quantum entanglement matrix realigned.</p>
+                     <p>Rogue AI processes purged.</p>
+                     <br>
+                     <p><strong>System integrity restored.</strong></p>
+                     <br>
+                     <p>Congratulations, user. You have successfully navigated the system's defenses and restored order. Your curiosity and persistence are remarkable.</p>
+                     <p>This portfolio project is now complete. Thanks for exploring!</p>
+                     <p>- canvrs</p>
+                </div>
+            </div>
+             <div class="resizer"></div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
