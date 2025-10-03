@@ -1,38 +1,33 @@
 # canvrs
 
-Hi — I’m canvrs, a developer based in Germany. I work at [@modcoretech](https://github.com/modcoretech), where we build tools that improve the way people use the web.
-
-I enjoy working on clean, focused products — mostly browser extensions and web utilities — and I care about details, UX, and performance.
+i’m canvrs, a developer from germany who builds web tools that try to stay out of the way but make a real difference. i spend most of my time at [@modcoretech](https://github.com/modcoretech), where the focus is on extensions and utilities that make the web smoother, faster, and a little saner.
 
 ---
 
-### What I’m Building
+## what i’m working on
 
-At modcore, I’ve contributed to projects like:
+- [**modcore extension manager**](https://github.com/modcoretech/modcore-extension-manager)  
+  manage, analyze, and customize your browser extensions without the clutter.  
 
-- [**modcore Extension Manager**](https://github.com/modcoretech/modcore-extension-manager)  
-  A better way to manage your browser extensions.
+- [**link sanitizer**](https://github.com/modcoretech/link-sanitizer)  
+  strip trackers and noise from urls before they follow you around.  
 
-- [**Link Sanitizer**](https://github.com/modcoretech/link-sanitizer)  
-  Automatically removes trackers and clutter from URLs.
+- [**dictionary extension**](https://github.com/modcoretech/dictionary-extension)  
+  a fast, lightweight dictionary that works right where you are.  
 
-- [**Dictionary Extension**](https://github.com/modcoretech/dictionary-extension)  
-  A lightweight in-page dictionary for quick reference.
-
-And there’s more on the way — always experimenting, improving, and building things that feel good to use.
+new tools and ideas are always in the mix — i like experimenting with small things that can scale.
 
 ---
 
-### About Me
+## about me
 
-- Based in Germany  
-- Languages: English, German, and a little Spanish & Turkish  
-- Interests: web development, design systems, and gaming  
-- Always curious about how small tools can make a big impact
+- germany-based, fluent in english & german, learning spanish and turkish  
+- into web development, design systems, and games
+- focused on details, ux, and performance — because the small stuff adds up  
 
 ---
 
-### Elsewhere
+## elsewhere
 
-You can find most of my work through [@modcoretech](https://github.com/modcoretech).  
-Occasionally, I write or share things — but most of the time, I'm building quietly.
+most of what i build lives at [@modcoretech](https://github.com/modcoretech).  
+sometimes i write or share thoughts, but mostly, i’m shipping and refining quietly.
