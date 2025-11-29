@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>UnboundedHQ | UI/UX, Accessibility (A11y) & Frontend Developer Portfolio</title>
+    <meta name="description" content="UnboundedHQ specializes in designing limitless digital experiences with a core focus on UI/UX, Web Accessibility (A11y), and high-performance Chrome Extensions. View selected frontend projects.">
+    <meta name="keywords" content="UI/UX Design, Web Accessibility, A11y, Frontend Development, Chrome Extensions, GSAP, JavaScript, User Experience, Interaction Design, Design Systems">
+    <meta favicon="assets/favicon.ico" type="image/x-icon">
+    
+    <meta property="og:title" content="UnboundedHQ | UI/UX & A11y Frontend Portfolio">
+    <meta property="og:description" content="Designing the Invisible: Crafting high-performance, accessible frontend interfaces and powerful browser extensions.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="unboundedhq.github.io/Unbounded/">
+    <meta property="og:image" content="https://unboundedhq.github.io/Unbounded/assets/og-image.png">
+    <meta property="og:site_name" content="UnboundedHQ">
+    <meta property="og:locale" content="en_US">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@modcoretech"> <meta name="twitter:title" content="UnboundedHQ | UI/UX & A11y Frontend Portfolio">
+    <meta name="twitter:description" content="Specializing in accessible UI/UX design, frontend development, and powerful browser extensions.">
+
+    <link rel="canonical" href="unboundedhq.github.io/Unbounded/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #050505;
+            --surface: #0f0f0f;
+            --text-main: #e0e0e0;
+            --text-muted: #999;
+            --accent: #fff; 
+            --border: rgba(255,255,255,0.1);
+            --focus-color: #4d9fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ACCESSIBILITY: Visible Focus States */
+        *:focus-visible {
+            outline: 2px solid var(--focus-color);
+            outline-offset: 4px;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+
+        /* Skip Link for Screen Readers */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent);
+            color: var(--bg);
+            padding: 8px;
+            z-index: 10001;
+            transition: top 0.3s;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .skip-link:focus { top: 0; }
+
+        /* Grain Overlay */
+        .noise {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9000;
+            opacity: 0.04;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+        }
+
+        /* CUSTOM CURSOR (Desktop Only) */
+        @media (hover: hover) and (pointer: fine) {
+            body { cursor: none; }
+            .cursor-dot, .cursor-outline {
+                position: fixed;
+                top: 0; left: 0;
+                transform: translate(-50%, -50%);
+                border-radius: 50%;
+                z-index: 9999;
+                pointer-events: none;
+            }
+            .cursor-dot {
+                width: 6px; height: 6px;
+                background-color: var(--accent);
+            }
+            .cursor-outline {
+                width: 40px; height: 40px;
+                border: 1px solid rgba(255,255,255,0.5);
+                transition: width 0.2s, height 0.2s, background-color 0.2s;
+            }
+        }
+        
+        @media (hover: none) {
+            .cursor-dot, .cursor-outline { display: none; }
+        }
+
+        /* LAYOUT UTILITIES */
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-spacer { padding: 8rem 0; }
+
+        h2.section-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+            display: inline-block;
+        }
+
+        /* HERO SECTION */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: -1px;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(3.5rem, 11vw, 9rem);
+            line-height: 0.9;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.04em;
+            margin-bottom: 2rem;
+            will-change: transform, opacity;
+        }
+
+        .hero-line {
+            display: block;
+            overflow: hidden;
+        }
+        
+        .hero-line span {
+            display: block;
+            transform: translateY(100%);
+        }
+
+        .hero h1 span:hover {
+            -webkit-text-stroke: 1px var(--accent);
+            color: transparent;
+            transition: 0.3s;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .tags {
+            display: flex;
+            gap: 1rem;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        /* BUTTONS */
+        .magnetic-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .magnetic-btn::after {
+            content: '';
+            position: absolute;
+            background: var(--text-main);
+            width: 100%; height: 100%;
+            top: 100%; left: 0;
+            transition: top 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: -1;
+        }
+
+        .magnetic-btn:hover {
+            color: var(--bg);
+            border-color: transparent;
+        }
+        .magnetic-btn:hover::after { top: 0; }
+
+        /* MARQUEE */
+        .marquee-section {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+            white-space: nowrap;
+            background: var(--bg);
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 25s linear infinite;
+        }
+        .marquee-item {
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-right: 4rem;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        .marquee-item:hover { color: var(--accent); }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* PHILOSOPHY / ABOUT */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .big-text {
+            font-size: clamp(1.2rem, 2.5vw, 2rem);
+            line-height: 1.4;
+            max-width: 900px;
+        }
+        
+        .big-text span {
+            color: var(--text-muted);
+        }
+        
+        .highlight { color: var(--accent) !important; }
+
+        /* PROJECTS GRID */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            border-radius: 12px;
+            transition: transform 0.3s, border-color 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .card-header h3 {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tag {
+            font-size: 0.75rem;
+            background: rgba(255,255,255,0.05);
+            padding: 4px 10px;
+            border-radius: 4px;
+            color: var(--text-muted);
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .card-link {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* FOOTER */
+        .footer {
+            padding: 4rem 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-link {
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-link:hover { color: var(--accent); }
+
+        /* MEDIA QUERIES */
+        @media (min-width: 768px) {
+            .about-grid { grid-template-columns: 1fr 2fr; }
+            .hero-meta { flex-direction: row; }
+        }
+
+        /* REDUCED MOTION */
+        @media (prefers-reduced-motion: reduce) {
+            * { animation: none !important; transition: none !important; }
+            .marquee-content { animation: none; display: flex; flex-wrap: wrap; gap: 1rem; }
+            .hero h1 span, .project-card { opacity: 1 !important; transform: none !important; }
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "UnboundedHQ",
+        "alternateName": "Unbounded",
+        "url": "unboundedhq.github.io/Unbounded/",
+        "description": "Frontend developer specializing in UI/UX, Web Accessibility (A11y), and Chrome Extension development.",
+        "jobTitle": "Frontend Developer & UI/UX Specialist",
+        "knowsAbout": ["User Interface Design", "User Experience", "Web Accessibility", "Frontend Development", "Chrome Extensions", "GSAP", "JavaScript"],
+        "sameAs": [
+          "https://github.com/UnboundedHQ",
+          "mailto:ngde@web.de"
+        ]
+      }
+    }
+    </script>
+    </head>
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="noise"></div>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <div class="container">
+        <header>
+            <a href="#" class="logo">UNBOUNDED</a>
+            <nav role="navigation" aria-label="Main Navigation">
+                <a href="https://github.com/UnboundedHQ" target="_blank" class="magnetic-btn" aria-label="Visit UnboundedHQ GitHub Profile">
+                    <i class="ri-github-fill"></i> UnboundedHQ
+                </a>
+            </nav>
+        </header>
+
+        <main id="main-content">
+            <section class="hero">
+                <h1 aria-label="Unbounded Designing The Invisible">
+                    <span class="hero-line"><span>Designing</span></span>
+                    <span class="hero-line"><span>The</span></span>
+                    <span class="hero-line"><span>Invisible.</span></span>
+                </h1>
+                
+                <div class="hero-meta">
+                    <div class="tags">
+                        <span>UI/UX</span> • <span>A11Y</span> • <span>EXTENSIONS</span>
+                    </div>
+                    <p style="color: var(--text-muted); max-width: 400px;">
+                        Crafting <strong>high-performance frontend interfaces</strong> with a critical focus on <strong>Web Accessibility (A11y)</strong>, fluid motion, and practical utility.
+                    </p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="marquee-section" role="region" aria-label="Key Specializations Marquee">
+        <div class="marquee-content">
+            <span class="marquee-item">Accessibility</span>
+            <span class="marquee-item">Design Systems</span>
+            <span class="marquee-item">Chrome Extensions</span>
+            <span class="marquee-item">Interaction Design</span>
+            <span class="marquee-item">Frontend Development</span>
+            <span class="marquee-item">Accessibility</span>
+            <span class="marquee-item">Design Systems</span>
+            <span class="marquee-item">Chrome Extensions</span>
+            <span class="marquee-item">Interaction Design</span>
+            <span class="marquee-item">Frontend Development</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="section-spacer" id="philosophy">
+            <div class="about-grid">
+                <h2 class="section-title">Philosophy</h2>
+                <p class="big-text reveal-text">
+                    <span>Digital experiences should be </span>
+                    <span class="highlight">boundless</span>.
+                    <span>I bridge the gap between complex engineering and human-centric design. My work focuses on </span>
+                    <span class="highlight">Web Accessibility (A11y)</span>
+                    <span> as a standard, not an afterthought, creating tools and extensions that enhance the web for everyone.</span>
+                </p>
+            </div>
+        </section>
+
+        <section class="section-spacer" id="work">
+            <h2 class="section-title">Selected Works</h2>
+            <div class="project-grid">
+                
+                <a href="https://github.com/modcoretech/modcore-extension-manager" target="_blank" class="project-card">
+                    <div class="card-header">
+                        <div class="card-tags">
+                            <span class="tag">Extension</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                        <h3>modcore Extension Manager</h3>
+                    </div>
+                    <p class="card-desc">A privacy-focused, open-source <strong>browser extension</strong> from modcore for managing and securing your installed extensions with a clean, <strong>accessible UI</strong>.</p>
+                    <div class="card-link">View Repository <i class="ri-arrow-right-line"></i></div>
+                </a>
+
+                <a href="https://github.com/modcoretech/link-sanitizer" target="_blank" class="project-card">
+                    <div class="card-header">
+                        <div class="card-tags">
+                            <span class="tag">Extension</span>
+                            <span class="tag">Privacy</span>
+                            <span class="tag">Security</span>
+                        </div>
+                        <h3>Link Sanitizer</h3>
+                    </div>
+                    <p class="card-desc"><strong>Link Sanitizer</strong> removes unnecessary tracking parameters from URLs, giving users cleaner, more <strong>private links</strong>. Focused on robust <strong>user experience</strong>.</p>
+                    <div class="card-link">View Repository <i class="ri-arrow-right-line"></i></div>
+                </a>
+
+                <a href="https://github.com/UnboundedHQ/Unbounded" target="_blank" class="project-card">
+                    <div class="card-header">
+                        <div class="card-tags">
+                            <span class="tag">Frontend</span>
+                            <span class="tag">GSAP</span>
+                        </div>
+                        <h3>Unbounded Portfolio</h3>
+                    </div>
+                    <p class="card-desc">The source code for this portfolio. A demonstration of modern <strong>accessible frontend development</strong> featuring magnetic buttons and smooth, GSAP-driven motion.</p>
+                    <div class="card-link">View Repository <i class="ri-arrow-right-line"></i></div>
+                </a>
+
+                <a href="https://github.com/modcoretech/extension-source-viewer" target="_blank" class="project-card">
+                    <div class="card-header">
+                        <div class="card-tags">
+                            <span class="tag">Web</span>
+                            <span class="tag">Develop</span>
+                            <span class="tag">Extension</span>
+                        </div>
+                        <h3>Extension Source Viewer</h3>
+                    </div>
+                    <p class="card-desc">Extension Source Viewer is a web-based tool for examining the source code of Chrome extensions.</p>
+                    <div class="card-link">View Repository <i class="ri-arrow-right-line"></i></div>
+                </a>
+
+            </div>
+        </section>
+
+        <footer class="footer" role="contentinfo">
+            <div class="footer-links">
+                <a href="mailto:ngde@web.de" class="footer-link">ngde@web.de</a>
+                <a href="https://github.com/UnboundedHQ" target="_blank" class="footer-link">github/UnboundedHQ</a>
+            </div>
+            <p style="color: #444; font-size: 0.8rem; margin-top: 2rem;">
+                BUILT WITH <i class="ri-heart-fill" style="color: var(--text-muted); font-size: 10px;"></i> & CODE. EST 2025.
+            </p>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // --- 1. CURSOR LOGIC ---
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        // Only activate cursor logic on non-touch devices (CSS media query handles the hiding)
+        if (window.matchMedia("(pointer: fine)").matches) {
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+
+                gsap.to(cursorOutline, {
+                    x: posX,
+                    y: posY,
+                    duration: 0.15,
+                    ease: "power2.out"
+                });
+            });
+
+            // Hover interactions
+            const interactables = document.querySelectorAll('a, .project-card, .marquee-item');
+            interactables.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    gsap.to(cursorOutline, { scale: 2.5, backgroundColor: "rgba(255,255,255,0.05)", border: "none", duration: 0.3 });
+                });
+                el.addEventListener('mouseleave', () => {
+                    gsap.to(cursorOutline, { scale: 1, backgroundColor: "transparent", border: "1px solid rgba(255,255,255,0.5)", duration: 0.3 });
+                });
+            });
+        }
+
+        // --- 2. ANIMATIONS (Kept from original) ---
+        
+        // Hero Reveal
+        const tl = gsap.timeline();
+        tl.to('.hero-line span', {
+            y: 0,
+            duration: 1.2,
+            ease: "power4.out",
+            stagger: 0.2,
+            delay: 0.2
+        })
+        .from('.hero-meta', {
+            opacity: 0,
+            y: 20,
+            duration: 0.8
+        }, "-=0.5");
+
+        // Project Cards Stagger
+        gsap.utils.toArray('.project-card').forEach((card, i) => {
+            gsap.to(card, {
+                scrollTrigger: {
+                    trigger: ".project-grid",
+                    start: "top 85%",
+                },
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                delay: i * 0.1,
+                ease: "power2.out"
+            });
+        });
+
+        // Philosophy Text Reveal
+        gsap.from(".big-text span", {
+            scrollTrigger: {
+                trigger: ".big-text",
+                start: "top 80%",
+            },
+            opacity: 0.3,
+            y: 10,
+            duration: 1,
+            stagger: 0.05,
+            ease: "power2.out"
+        });
+
+        // --- 3. MAGNETIC BUTTON ---
+        const btn = document.querySelector('.magnetic-btn');
+        if(btn) {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                gsap.to(btn, { x: x * 0.3, y: y * 0.3, duration: 0.3 });
+            });
+            btn.addEventListener('mouseleave', () => {
+                gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" });
+            });
+        }
+    </script>
+</body>
+</html>
